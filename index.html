@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ad Reward System</title>
@@ -117,17 +119,17 @@
             margin: 5px 0;
         }
     </style>
-<link rel="me" href="https://www.blogger.com/profile/12615525391666988711">
-<meta name="google-adsense-platform-account" content="ca-host-pub-1556223355139109">
-<meta name="google-adsense-platform-domain" content="blogspot.com">
+    <link rel="me" href="https://www.blogger.com/profile/12615525391666988711">
+    <meta name="google-adsense-platform-account" content="ca-host-pub-1556223355139109">
+    <meta name="google-adsense-platform-domain" content="blogspot.com">
 </head>
 <body>
     <div class="container">
-        <h1> Simplifying Online Income</h1>
+        <h1>Simplifying Online Income</h1>
      
         <!-- Display User Info -->
         <div class="user-info">
-            <p>Welcome, <span id="user-name">@exampleUser</span></p>
+            <p>Welcome, <span id="user-name">To EarnGram</span></p>
         </div>
 
         <div class="stats">
@@ -139,137 +141,134 @@
         </div>
         <div class="buttons">
             <button id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
-            <button id="auto-ad-btn" onclick="startAutoAds()">Auto Show Ads</button>
-            <button id="stop-auto-btn" onclick="stopAutoAds()">Stop Auto Ads</button>
-            <button id="withdraw-btn" onclick="showWithdrawForm()">Withdraw</button>
+            <button id="autobn-ad-btn" onclick="startAutbboAds()">Coming soon</button>
+            <button id="stop- kauto-btn" onclick="stopAutnnoAds()">Coming soon</button>
         </div>
+        
+        <script src='https://niphaumeenses.net/vignette.min.js' data-zone='8600437' data-sdk='show_8600437'></script>
+        <script>
+            // Constants for click limit and time limit
+            const CLICK_LIMIT = 5;
+            const TIME_LIMIT = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
 
-        <!-- Withdraw Section -->
-        <div class="withdraw-section" id="withdraw-section">
-            <h3 style="color: orange; margin-bottom: 15px;">Withdrawal Request</h3>
-            <input type="number" id="withdraw-amount" placeholder="Enter Points to Withdraw">
-            <select id="payment-method">
-                <option value="bkash">Bkash</option>
-                <option value="nagad">Nagad</option>
-                <option value="manual">Manual</option>
-            </select>
-            <input type="text" id="withdraw-phone" placeholder="Enter Phone Number">
-            <button onclick="withdrawPoints()">Withdraw</button>
-            <p id="withdraw-status"></p>
-        </div>
+            const MIN_WITHDRAW_POINTS = 5;
+            const ADMIN_USER_ID = 6665642603;
+            const BOT_TOKEN = "7650328364:AAFUjkUvkLz4xktEmgJepqgXWsBZOkRCE_g";
+            let watchedAdsCount = 0;
+            let earnedPoints = 0.00;
+            let autoAdInterval;
+            let clickCount = localStorage.getItem('clickCount') || 0;
+            let lastClickTime = localStorage.getItem('lastClickTime');
+
+            // Simulate user name from Telegram User ID (replace with actual logic to get user info)
+            const telegramUserName = "@exampleUser"; // Replace this line with the actual logic to fetch username
+            document.getElementById("user-name").textContent = telegramUserName;
+
+            // If 8 hours have passed, reset click count
+            if (lastClickTime && (Date.now() - lastClickTime > TIME_LIMIT)) {
+                clickCount = 0;
+                localStorage.setItem('clickCount', clickCount);
+            }
+
+            // Display current click count
+            document.getElementById('watched-ads').textContent = clickCount;
+
+            // Watch Ad function with click limit and timer logic
+            function watchAd() {
+                // Check if the user has clicked less than the limit
+                if (clickCount >= CLICK_LIMIT) {
+                    alert('You can only click 5 times in 8 hours.');
+                    return;
+                }
+
+                // Simulate ad watching logic
+                if (typeof show_8600437 === 'function') {
+                    show_8600437().then(() => {
+                        // Increment the clicked ads count
+                        clickCount++;
+                        document.getElementById('watched-ads').textContent = clickCount;
+                        earnedPoints += 0.50;
+                        document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+
+                        // Save updated values to localStorage
+                        localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                        localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+
+                        // Update the last click time
+                        localStorage.setItem('lastClickTime', Date.now());
+
+                        // Save the click count in localStorage
+                        localStorage.setItem('clickCount', clickCount);
+
+                        // Update progress circle
+                        updateProgressCircle();
+                    });
+                } else {
+                    console.error('Ad function not available.');
+                }
+            }
+
+            // Update progress circle based on watched ads
+            function updateProgressCircle() {
+                const percentage = (watchedAdsCount / 10) * 100;
+                document.getElementById('ads-progress').textContent = `${percentage}%`;
+            }
+
+            // Start auto ads
+            function startAutoAds() {
+                autoAdInterval = setInterval(watchAd, 5000); // Auto show ad every 5 seconds
+                document.getElementById('auto-ad-btn').disabled = true;
+                document.getElementById('stop-auto-btn').disabled = false;
+            }
+
+            // Stop auto ads
+            function stopAutoAds() {
+                clearInterval(autoAdInterval);
+                document.getElementById('auto-ad-btn').disabled = false;
+                document.getElementById('stop-auto-btn').disabled = true;
+            }
+
+            // Function to show withdraw form
+            function showWithdrawForm() {
+                document.getElementById('withdraw-section').style.display = 'block';
+            }
+
+            // Function to handle withdrawal
+            function withdrawPoints() {
+                const amount = document.getElementById('withdraw-amount').value;
+                const paymentMethod = document.getElementById('payment-method').value;
+                const phoneNumber = document.getElementById('withdraw-phone').value;
+
+                if (amount < MIN_WITHDRAW_POINTS) {
+                    document.getElementById('withdraw-status').textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_POINTS} points.`;
+                    return;
+                }
+
+                if (amount > earnedPoints) {
+                    document.getElementById('withdraw-status').textContent = 'Insufficient points.';
+                    return;
+                }
+
+                // Withdraw logic (use Telegram API to notify admin)
+                // Send withdrawal request to admin via Telegram bot
+                const message = `User ${telegramUserName} wants to withdraw ${amount} points via ${paymentMethod}. Phone number: ${phoneNumber}.`;
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_USER_ID}&text=${message}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) {
+                            earnedPoints -= amount;
+                            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+                            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+                            document.getElementById('withdraw-status').textContent = `Withdrawal of ${amount} points successful.`;
+                        } else {
+                            document.getElementById('withdraw-status').textContent = 'Failed to send withdrawal request.';
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('withdraw-status').textContent = 'Error in withdrawal request.';
+                    });
+            }
+        </script>
     </div>
-
-<script src='https://niphaumeenses.net/vignette.min.js' data-zone='8600437' data-sdk='show_8600437'></script>
-    <script>
-        const MIN_WITHDRAW_POINTS = 5;
-        const ADMIN_USER_ID = 6665642603;
-        const BOT_TOKEN = "7650328364:AAFUjkUvkLz4xktEmgJepqgXWsBZOkRCE_g";
-        let watchedAdsCount = 0;
-        let earnedPoints = 0.00;
-        let autoAdInterval;
-
-        // Simulate user name from Telegram User ID (replace with actual logic to get user info)
-        const telegramUserName = "@exampleUser"; // Replace this line with the actual logic to fetch username
-        document.getElementById("user-name").textContent = telegramUserName;
-
-        // Check if user data is saved in localStorage
-        if (localStorage.getItem('watchedAdsCount')) {
-            watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
-            earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
-            document.getElementById('watched-ads').textContent = watchedAdsCount;
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-        }
-
-        // Make sure show_8600437() is available, or define an ad function
-function watchAd() {
-    if (typeof show_8600437 === 'function') {
-        show_8600437().then(() => {
-            watchedAdsCount++;
-            document.getElementById('watched-ads').textContent = watchedAdsCount;
-            earnedPoints += 0.50;
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-            localStorage.setItem('watchedAdsCount', watchedAdsCount);
-            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
-            updateProgressCircle();
-        });
-    } else {
-        console.error('Ad function not available.');
-    }
-}
-
-
-        // Update progress circle based on watched ads
-        function updateProgressCircle() {
-            const percentage = (watchedAdsCount / 10) * 100;
-            document.getElementById('ads-progress').textContent = `${percentage}%`;
-        }
-
-        // Function to start auto showing ads
-        function startAutoAds() {
-            autoAdInterval = setInterval(watchAd, 5000); // Auto show ad every 5 seconds
-            document.getElementById('auto-ad-btn').disabled = true;
-            document.getElementById('stop-auto-btn').disabled = false;
-        }
-
-        // Function to stop auto ads
-        function stopAutoAds() {
-            clearInterval(autoAdInterval);
-            document.getElementById('auto-ad-btn').disabled = false;
-            document.getElementById('stop-auto-btn').disabled = true;
-        }
-
-        // Function to show withdraw form
-        function showWithdrawForm() {
-            document.getElementById('withdraw-section').style.display = 'block';
-        }
-
-        // Function to handle withdrawal
-        function withdrawPoints() {
-            const amount = document.getElementById('withdraw-amount').value;
-            const paymentMethod = document.getElementById('payment-method').value;
-            const phoneNumber = document.getElementById('withdraw-phone').value;
-
-            if (amount < MIN_WITHDRAW_POINTS) {
-                document.getElementById('withdraw-status').textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_POINTS} points.`;
-                return;
-            }
-
-            if (amount > earnedPoints) {
-                document.getElementById('withdraw-status').textContent = `Insufficient balance. You have ${earnedPoints.toFixed(2)} points.`;
-                return;
-            }
-
-            // Subtract points from earnedPoints after successful withdrawal
-            earnedPoints -= parseFloat(amount);
-            document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-
-            // Save the updated balance in localStorage
-            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
-
-            // Send withdrawal request to admin via Telegram
-            const message = `Withdrawal Request from ${telegramUserName}:\nAmount: ${amount} points\nPayment Method: ${paymentMethod}\nPhone Number: ${phoneNumber}`;
-            sendWithdrawRequestToAdmin(message);
-
-            // Show success message
-            document.getElementById('withdraw-status').textContent = 'Withdrawal request sent successfully!';
-
-            // Clear form
-            document.getElementById('withdraw-amount').value = '';
-            document.getElementById('withdraw-phone').value = '';
-        }
-
-        // Function to send withdrawal request to admin
-        function sendWithdrawRequestToAdmin(message) {
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_USER_ID}&text=${encodeURIComponent(message)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        console.log('Message sent to admin');
-                    }
-                })
-                .catch(error => console.error('Error sending message:', error));
-        }
-    </script>
-
-
-</body></html>
+</body>
+</html>
