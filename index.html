@@ -152,10 +152,7 @@
         
         <script src='https://niphaumeenses.net/vignette.min.js' data-zone='8600437' data-sdk='show_8600437'></script>
         <script>
-            // Constants for click limit and time limit
-const CLICK_LIMIT = 5;
-const TIME_LIMIT = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
-
+     
             const MIN_WITHDRAW_POINTS = 5;
             const ADMIN_USER_ID = 6665642603;
             const BOT_TOKEN = "7650328364:AAFUjkUvkLz4xktEmgJepqgXWsBZOkRCE_g";
@@ -169,22 +166,12 @@ const TIME_LIMIT = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
             const telegramUserName = "@exampleUser"; // Replace this line with the actual logic to fetch username
             document.getElementById("user-name").textContent = telegramUserName;
 
-            // If 8 hours have passed, reset click count
-            if (lastClickTime && (Date.now() - lastClickTime > TIME_LIMIT)) {
-                clickCount = 0;
-                localStorage.setItem('clickCount', clickCount);
-            }
+            
 
             // Display current click count
             document.getElementById('watched-ads').textContent = clickCount;
 
-            // Watch Ad function with click limit and timer logic
-            function watchAd() {
-                // Check if the user has clicked less than the limit
-                if (clickCount >= CLICK_LIMIT) {
-                    alert('You can only click 5 times in 2 hours.');
-                    return;
-                }
+          
 
                 // Simulate ad watching logic
                 if (typeof show_8600437 === 'function') {
