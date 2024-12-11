@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earngram Watch Ads </title>
-    <script src="js/vignette.min.js" data-zone="8600437" data-sdk="show_8600437"></script>
+    <script src='https://niphaumeenses.net/vignette.min.js' data-zone='8600437' data-sdk='show_8600437'></script>
     <style>
         body {
             display: flex;
@@ -100,7 +100,12 @@
     <div class="app-container">
         <h2>Watch Ads and Earn Rewards!</h2>
         <div class="token-section" id="tokenCount">Tokens: 0</div>
-  
+        <div class="referral-section">
+            <p>Your Referral Link:</p>
+            <input type="text" id="referralLink" readonly="">
+            <button class="referral-button" onclick="copyReferralLink()">Copy Link</button>
+        </div>
+        <a class="developer-label" href="https://earngram.weebly.com" target="_blank">DEVELOPER BY DevDesign Studio</a>
         <button class="ad-button blue-button" onclick="showRewardedAd()">Show Ad 1</button>
         <button class="ad-button green-button" onclick="showRewardedAd()">Show Ad 2</button>
         <button class="ad-button yellow-button" onclick="showRewardedAd()">Show Ad 3</button>
