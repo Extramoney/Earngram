@@ -3,140 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini Bot with AdsGram</title>
-    <!-- Include the AdsGram Script -->
-    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+    <title>Reward Cards</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #121212;
-            color: #fff;
+            background-color: #f4f7fb;
             font-family: Arial, sans-serif;
+        }
+
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            text-align: center;
+            flex-wrap: wrap;
         }
 
-        .container {
-            background: #1f1f1f;
-            padding: 20px;
+        .reward-card {
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            width: 300px;
+            width: 250px;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s;
         }
 
-        .container h1 {
-            font-size: 24px;
-            color: green;
-            margin-bottom: 10px;
+        .reward-card:hover {
+            transform: translateY(-10px);
         }
 
-        .container p {
-            font-size: 16px;
-            margin-bottom: 20px;
+        .reward-card h2 {
+            font-size: 18px;
+            color: #333;
         }
 
-        .buttons button {
-            width: 90%;
-            margin: 5px 0;
-            padding: 10px;
+        .reward-card p {
             font-size: 14px;
+            color: #888;
+        }
+
+        .reward-card .reward-btn {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
             border-radius: 5px;
-            color: white;
-            background: green;
             cursor: pointer;
         }
 
-        .buttons button:hover {
-            background: darkorange;
+        .reward-card .reward-btn:hover {
+            background-color: #45a049;
         }
-
-        .progress-circle {
-            width: 80px;
-            height: 80px;
-            border: 4px solid green;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px auto;
-        }
-
-        .progress-circle span {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to My Telegram Mini Bot!</h1>
-        <p>Watch ads and earn rewards!</p>
 
-        <!-- Button to trigger the ad display -->
-        <div class="buttons">
-            <button onclick="onUserAction()">Watch Ad and Get Reward</button>
-        </div>
-
-        <!-- Reward Message -->
-        <p id="reward-message" style="display:none; color: green;">Congratulations! You have earned points for watching the ad!</p>
-
-        <div class="progress-circle">
-            <span id="ads-progress">0%</span>
-        </div>
+<div class="container">
+    <div class="reward-card">
+        <h2>Basic Reward</h2>
+        <p>Earn 10 points</p>
+        <button class="reward-btn" onclick="rewardUser(10)">Claim Reward</button>
     </div>
+    <div class="reward-card">
+        <h2>Premium Reward</h2>
+        <p>Earn 50 points</p>
+        <button class="reward-btn" onclick="rewardUser(50)">Claim Reward</button>
+    </div>
+    <div class="reward-card">
+        <h2>Gold Reward</h2>
+        <p>Earn 100 points</p>
+        <button class="reward-btn" onclick="rewardUser(100)">Claim Reward</button>
+    </div>
+</div>
 
-    <script>
-        // Initialize AdsGram with your blockId
-        const AdController = window.Adsgram.init({ blockId: "5657" });
+<script>
+    function rewardUser(points) {
+        alert(`You have claimed a reward of ${points} points!`);
+    }
+</script>
 
-        // Initialize variables to track ad progress
-        let watchedAdsCount = 0;
-
-        // Function to trigger the ad and handle the result
-        function onUserAction() {
-            // Show the ad
-            AdController.show().then((result) => {
-                // Check if the user watched the ad till the end
-                if (result.done) {
-                    // Reward the user for watching the ad till the end
-                    rewardUser(); // Your reward function
-                    console.log('User watched the ad successfully.');
-                    updateProgress();
-                } else {
-                    // Handle case when user closed the ad early
-                    console.log('User closed the ad before completing.');
-                }
-            }).catch((error) => {
-                // Handle any errors during ad playback
-                console.error('Error occurred:', error.description);
-            });
-        }
-
-        // Function to reward the user (e.g., give points or other incentives)
-        function rewardUser() {
-            document.getElementById("reward-message").style.display = "block"; // Show reward message
-            watchedAdsCount++; // Increase ad count
-            localStorage.setItem('watchedAdsCount', watchedAdsCount); // Save count to localStorage
-            updateProgress(); // Update progress circle
-        }
-
-        // Function to update the progress circle
-        function updateProgress() {
-            const percentage = (watchedAdsCount / 10) * 100; // Example: 10 ads = 100% progress
-            document.getElementById("ads-progress").textContent = `${percentage}%`;
-        }
-
-        // Check if there are saved watched ads in localStorage
-        if (localStorage.getItem('watchedAdsCount')) {
-            watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
-            updateProgress(); // Update progress on page load
-        }
-    </script>
 </body>
 </html>
