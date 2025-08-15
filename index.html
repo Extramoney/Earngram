@@ -151,7 +151,7 @@
         let autoAdInterval;
 
         const MAX_CLICKS = 15;
-        const COOLDOWN_MINUTES = 120;
+        const COOLDOWN_MINUTES = 60;
 
         const telegramUserName = "@exampleUser";
         document.getElementById("user-name").textContent = telegramUserName;
@@ -178,8 +178,8 @@
             let clicks = parseInt(localStorage.getItem('watchAdClicks')) || 0;
             if (clicks >= MAX_CLICKS) return;
 
-            if (typeof show_8600437 === 'function') {
-                show_8600437().then(() => {
+            if (typeof show_9283940 === 'function') {
+                show_9283940().then(() => {
                     watchedAdsCount++;
                     earnedPoints += 0.33;
                     document.getElementById('watched-ads').textContent = watchedAdsCount;
@@ -257,4 +257,5 @@
     </script>
 </body>
 </html>
+
 
